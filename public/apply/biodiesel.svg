@@ -1,0 +1,34 @@
+<svg width="1200" height="675" viewBox="0 0 1200 675" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="675" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B3B2B"/>
+      <stop offset="0.55" stop-color="#0A2D22"/>
+      <stop offset="1" stop-color="#071F18"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(860 190) rotate(135) scale(520 520)">
+      <stop stop-color="#F59E0B" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#F59E0B" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" stroke="#FFFFFF" stroke-opacity="0.06"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <rect width="1200" height="675" fill="url(#grid)"/>
+  <rect width="1200" height="675" fill="url(#glow)"/>
+
+  <rect x="90" y="86" width="1020" height="503" rx="28" fill="#0B251D" fill-opacity="0.55" stroke="#FFFFFF" stroke-opacity="0.10"/>
+
+  <!-- icon: droplet + leaf -->
+  <g>
+    <path d="M600 210C545 292 515 340 515 390C515 442 553 480 600 480C647 480 685 442 685 390C685 340 655 292 600 210Z" fill="#071F18" stroke="#FBBF24" stroke-opacity="0.60" stroke-width="4"/>
+    <path d="M600 255C560 312 545 345 545 382C545 416 570 441 600 441C630 441 655 416 655 382C655 345 640 312 600 255Z" fill="#FBBF24" fill-opacity="0.10"/>
+    <path d="M535 360C510 332 470 324 440 350C475 370 500 405 510 440C545 425 560 392 535 360Z" fill="#0F3B2B" stroke="#FBBF24" stroke-opacity="0.55" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M540 430C530 395 505 365 472 350" stroke="#FBBF24" stroke-opacity="0.45" stroke-width="4" stroke-linecap="round"/>
+  </g>
+
+  <path d="M230 160C330 100 420 90 520 130C610 167 690 150 760 120C820 92 920 100 1000 170C1080 240 1100 330 1040 410C970 505 860 520 740 500C620 480 560 520 460 550C350 583 240 570 170 500C90 420 120 230 230 160Z" fill="#FBBF24" fill-opacity="0.10"/>
+  <rect x="90" y="470" width="1020" height="119" rx="28" fill="#000000" fill-opacity="0.18"/>
+</svg>
+

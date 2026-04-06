@@ -1,0 +1,180 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+/* Warm & Accessible Fuel Business Theme - Option 3 */
+:root {
+  /* Primary Colors */
+  --background: #faf6f1; /* Warm cream/beige */
+  --foreground: #2d3b2d; /* Deep forest green */
+  
+  /* Card & Surface */
+  --card: #ffffff; /* Clean white */
+  --card-foreground: #2d3b2d;
+  --popover: #ffffff;
+  --popover-foreground: #2d3b2d;
+  
+  /* Primary - Deep Green */
+  --primary: #1f4d2a; /* Deep forest green */
+  --primary-foreground: #faf6f1;
+  
+  /* Secondary - Warm Beige */
+  --secondary: #e8dcc8; /* Warm beige */
+  --secondary-foreground: #2d3b2d;
+  
+  /* Muted Tones */
+  --muted: #e8dcc8;
+  --muted-foreground: #666666;
+  
+  /* Accent - Medium Green */
+  --accent: #2d7a3a; /* Vibrant green accent */
+  --accent-foreground: #faf6f1;
+  
+  /* Action Button - Light Orange */
+  --action: #F59E0B; /* Light orange for buttons and links */
+  --action-foreground: #ffffff;
+
+  /* Brand Highlight (New) */
+  --info: #2b6f7c; /* Teal-blue (matches logo accent) */
+  --info-foreground: #ffffff;
+  
+  /* Destructive */
+  --destructive: #dc2626;
+  --destructive-foreground: #faf6f1;
+  
+  /* Borders & Inputs */
+  --border: #d4c4b0;
+  --input: #ffffff;
+  --ring: var(--info);
+  
+  /* Charts */
+  --chart-1: #1f4d2a;
+  --chart-2: #2d7a3a;
+  --chart-3: #e8dcc8;
+  --chart-4: #d4c4b0;
+  --chart-5: #f5ede2;
+  
+  --radius: 0.625rem;
+  
+  /* Sidebar */
+  --sidebar: #faf6f1;
+  --sidebar-foreground: #2d3b2d;
+  --sidebar-primary: #1f4d2a;
+  --sidebar-primary-foreground: #faf6f1;
+  --sidebar-accent: #2d7a3a;
+  --sidebar-accent-foreground: #faf6f1;
+  --sidebar-border: #d4c4b0;
+  --sidebar-ring: #2d7a3a;
+}
+
+@theme inline {
+  --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial,
+    'Noto Sans', 'Liberation Sans', sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-action: var(--action);
+  --color-action-foreground: var(--action-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  /* Typography & Spacing */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Scrollbar utilities (used for dashboard tables) */
+  .scrollbar-white {
+    scrollbar-color: rgba(255, 255, 255, 0.65) transparent;
+    scrollbar-width: thin;
+  }
+
+  .scrollbar-white::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  .scrollbar-white::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-white::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 999px;
+    border: 2px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box;
+  }
+
+  .scrollbar-white::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.75);
+  }
+  
+  h1 {
+    @apply text-4xl font-bold tracking-tight;
+  }
+  
+  h2 {
+    @apply text-3xl font-bold tracking-tight;
+  }
+  
+  h3 {
+    @apply text-2xl font-semibold tracking-tight;
+  }
+  
+  h4 {
+    @apply text-xl font-semibold;
+  }
+  
+  p {
+    @apply text-base leading-relaxed;
+  }
+  
+  .small-text {
+    @apply text-sm text-muted-foreground;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
