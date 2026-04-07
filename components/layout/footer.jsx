@@ -110,12 +110,6 @@ export function Footer() {
             </div>
 
             <div className="mt-6 space-y-3 text-sm">
-              <Link href="/contact" className="block text-primary-foreground/90 transition-colors hover:text-white">
-                Contact for project discussion
-              </Link>
-              <Link href="/quote" className="block text-primary-foreground/90 transition-colors hover:text-white">
-                Submit an enquiry
-              </Link>
               <a
                 href="https://wa.me/919151141423"
                 target="_blank"

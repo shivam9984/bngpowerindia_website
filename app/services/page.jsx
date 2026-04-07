@@ -99,7 +99,7 @@ export const metadata = {
     'Delivery services after business selection, including project assessment, documentation support, execution coordination, commissioning readiness, and post-launch support across energy infrastructure projects.',
   keywords: [
     'project execution services',
-    'energy project support',
+    'energy execution support',
     'commissioning support',
     'documentation and approvals coordination',
     'post-sales infrastructure services',

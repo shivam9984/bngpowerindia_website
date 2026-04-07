@@ -384,44 +384,6 @@ export default function ProfilePage() {
     setIsEditMode(false)
   }, [hydrateFromProfile, profile])
 
-  useEffect(() => {
-    const onBeforeUnload = (event) => {
-      if (!dirty) return
-      event.preventDefault()
-      event.returnValue = ''
-    }
-    window.addEventListener('beforeunload', onBeforeUnload)
-    return () => window.removeEventListener('beforeunload', onBeforeUnload)
-  }, [dirty, handleSave])
-
-  useEffect(() => {
-    const onDocumentClickCapture = (event) => {
-      if (!dirty) return
-      const target = event.target instanceof Element ? event.target : null
-      const anchor = target?.closest?.('a[href]')
-      if (!anchor) return
-
-      const href = anchor.getAttribute('href')
-      if (!href) return
-      if (href.startsWith('#')) return
-      if (anchor.getAttribute('target') === '_blank') return
-
-      event.preventDefault()
-      const ok = window.confirm('You have unsaved changes. Click OK to save and leave, or Cancel to stay.')
-      if (!ok) return
-
-      void (async () => {
-        const saved = await handleSave()
-        if (saved) {
-          window.location.href = href
-        }
-      })()
-    }
-
-    document.addEventListener('click', onDocumentClickCapture, true)
-    return () => document.removeEventListener('click', onDocumentClickCapture, true)
-  }, [dirty, handleSave])
-
   const uploadDoc = useCallback(async (file, documentType) => {
     if (!file) return null
     if (!user?.id) return null
@@ -576,6 +538,44 @@ export default function ProfilePage() {
     uploadDoc,
     user,
   ])
+
+  useEffect(() => {
+    const onBeforeUnload = (event) => {
+      if (!dirty) return
+      event.preventDefault()
+      event.returnValue = ''
+    }
+    window.addEventListener('beforeunload', onBeforeUnload)
+    return () => window.removeEventListener('beforeunload', onBeforeUnload)
+  }, [dirty])
+
+  useEffect(() => {
+    const onDocumentClickCapture = (event) => {
+      if (!dirty) return
+      const target = event.target instanceof Element ? event.target : null
+      const anchor = target?.closest?.('a[href]')
+      if (!anchor) return
+
+      const href = anchor.getAttribute('href')
+      if (!href) return
+      if (href.startsWith('#')) return
+      if (anchor.getAttribute('target') === '_blank') return
+
+      event.preventDefault()
+      const ok = window.confirm('You have unsaved changes. Click OK to save and leave, or Cancel to stay.')
+      if (!ok) return
+
+      void (async () => {
+        const saved = await handleSave()
+        if (saved) {
+          window.location.href = href
+        }
+      })()
+    }
+
+    document.addEventListener('click', onDocumentClickCapture, true)
+    return () => document.removeEventListener('click', onDocumentClickCapture, true)
+  }, [dirty, handleSave])
 
   const handleSubmit = async (e) => {
     e.preventDefault()

@@ -6,6 +6,7 @@ import { getApiServerClient } from '@/lib/api/server'
 import { normalizeProfile } from '@/lib/auth/profile'
 import { ensureUserProfile } from '@/lib/auth/profile.server'
 import { DEFAULT_PUBLIC_ROLE, toStoredRole } from '@/lib/auth/roles'
+import { getSupabaseAuthRedirectUrl } from '@/lib/supabase/env'
 
 /** Normalize to E.164; defaults 10-digit India numbers to +91 */
 function normalizePhoneToE164(input) {
@@ -30,14 +31,13 @@ export async function signUpAction(email, password, fullName, role = DEFAULT_PUB
   const trimmedEmail = String(email || '').trim().toLowerCase()
   const trimmedName = String(fullName || '').trim()
   const storedRole = toStoredRole(role || DEFAULT_PUBLIC_ROLE)
+  const emailRedirectTo = getSupabaseAuthRedirectUrl()
 
   const { data, error } = await supabase.auth.signUp({
     email: trimmedEmail,
     password,
     options: {
-      emailRedirectTo:
-        process.env.NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL ||
-        `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/auth/callback`,
+      emailRedirectTo,
       data: {
         full_name: trimmedName,
         role: storedRole,
@@ -249,9 +249,7 @@ export async function resendSignupConfirmationEmailAction(email) {
   const trimmed = String(email || '').trim()
   if (!trimmed) return { success: false, error: 'Email is required.' }
 
-  const emailRedirectTo =
-    process.env.NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL ||
-    `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/auth/callback`
+  const emailRedirectTo = getSupabaseAuthRedirectUrl()
 
   const { error } = await supabase.auth.resend({
     type: 'signup',

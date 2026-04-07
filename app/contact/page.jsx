@@ -16,7 +16,7 @@ const contactChannels = [
   {
     title: 'Call our team',
     description:
-      'Speak directly with our team for project discussions, technical queries, and immediate guidance on the next step.',
+      'Speak directly with our team for business enquiries, technical queries, and immediate guidance on the next step.',
     value: '+91 9151141423',
     href: 'tel:+919151141423',
     icon: Phone,
@@ -42,7 +42,7 @@ const contactChannels = [
 export const metadata = {
   title: 'Contact BNGPowerIndia | Green Energy and Future Energy Projects',
   description:
-    'Contact BNGPowerIndia for CBG, biodiesel, retail fuel station, and EV charging business enquiries, technical guidance, and project support.',
+    'Contact BNGPowerIndia for CBG, biodiesel, retail fuel station, and EV charging business enquiries, technical guidance, and execution guidance.',
   keywords: [
     'contact BNGPowerIndia',
     'green energy consultation',
@@ -135,7 +135,7 @@ export default function ContactPage() {
         <div className="mb-12 max-w-4xl">
           <p className="text-sm font-semibold text-primary">Get In Touch</p>
           <h2 className="mt-2 text-3xl font-bold text-foreground md:text-4xl">
-            Choose the fastest way to reach our project and operations team
+            Choose the fastest way to reach our business and operations team
           </h2>
         </div>
 
@@ -162,7 +162,7 @@ export default function ContactPage() {
       <Section>
         <div className="space-y-10">
           <div className="w-full">
-            <div className="rounded-[2.25rem] bg-gradient-to-br from-secondary/60 via-background to-secondary/30 px-6 py-8 md:px-8 md:py-10">
+            <div className="rounded-[2.25rem] border border-border/70 bg-gradient-to-br from-secondary via-background to-secondary/60 px-6 py-8 shadow-sm md:px-8 md:py-10">
               <div className="max-w-4xl">
                 <div className="flex items-start gap-4">
                   <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
@@ -171,48 +171,49 @@ export default function ContactPage() {
                   <div>
                     <p className="text-sm font-semibold text-primary">Office & Support</p>
                     <h2 className="mt-2 text-3xl font-bold text-foreground md:text-4xl">Reach BNGPowerIndia</h2>
-                    <p className="mt-3 max-w-3xl text-base leading-relaxed text-muted-foreground">
-                      Direct lines for project discussions, technical coordination, feasibility questions, and the next
-                      step for your business enquiry.
+                    <p className="mt-3 max-w-3xl text-base leading-relaxed text-foreground/80">
+                      Direct lines for business discussions, technical coordination, feasibility questions, and the next
+                      step for your enquiry.
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-8 h-px w-full bg-border" />
+              <div className="mt-8 h-px w-full bg-border/80" />
 
               <div className="mt-8 grid gap-8 md:grid-cols-3 md:gap-10">
                 <div className="md:pr-6">
-                  <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">Registered Office</p>
-                  <p className="mt-4 text-base leading-relaxed text-foreground">
+                  <p className="text-xs font-semibold uppercase tracking-[0.24em] text-foreground/70">Registered Office</p>
+                  <p className="mt-4 text-base font-medium leading-relaxed text-foreground">
                     A2 1004, Parijat Building, Gomti Nagar, Near Awadh Bus Station, Lucknow, Uttar Pradesh 226010
                   </p>
                 </div>
 
                 <div className="border-t border-border pt-8 md:border-l md:border-t-0 md:pl-8 md:pt-0">
-                  <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">Phone</p>
-                  <div className="mt-4 space-y-2 text-base text-foreground">
-                    <a className="block hover:underline" href="tel:+919151141423">
+                  <p className="text-xs font-semibold uppercase tracking-[0.24em] text-foreground/70">Phone</p>
+                  <div className="mt-4 space-y-2 text-base font-medium text-foreground">
+                    <a className="block transition-colors hover:text-primary hover:underline" href="tel:+919151141423">
                       +91 9151141423
                     </a>
-                    <a className="block hover:underline" href="tel:+915223384868">
+                    <a className="block transition-colors hover:text-primary hover:underline" href="tel:+915223384868">
                       0522 3384868
                     </a>
                   </div>
                 </div>
 
                 <div className="border-t border-border pt-8 md:border-l md:border-t-0 md:pl-8 md:pt-0">
-                  <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">Email & Hours</p>
+                  <p className="text-xs font-semibold uppercase tracking-[0.24em] text-foreground/70">Email & Hours</p>
                   <a
-                    className="mt-4 inline-block text-base text-foreground hover:underline"
+                    className="mt-4 inline-block text-base font-medium text-foreground transition-colors hover:text-primary hover:underline"
                     href="mailto:info@bngpowerindia.com"
                     suppressHydrationWarning
                   >
                     info@bngpowerindia.com
                   </a>
                   <div className="mt-4 space-y-1">
-                    <p className="text-sm leading-relaxed text-muted-foreground">Mon-Fri: 09:00 AM - 07:00 PM IST</p>
-                    <p className="text-sm leading-relaxed text-muted-foreground">Sat: 10:00 AM - 04:00 PM IST</p>
+                    <p className="text-sm font-medium leading-relaxed text-foreground/80">
+                      Mon-Sat: 09:30 AM - 06:00 PM IST
+                    </p>
                   </div>
                 </div>
               </div>

@@ -308,7 +308,12 @@ export function ServiceApplicationPage({ serviceKey }) {
         throw createError
       }
 
+      setForm(buildInitialApplicationForm(serviceKey))
+      setFieldErrors({})
       setSuccess(SUCCESS_MESSAGE)
+      if (redirectTimerRef.current) {
+        clearTimeout(redirectTimerRef.current)
+      }
       redirectTimerRef.current = setTimeout(() => {
         router.replace('/dashboard/applicant')
       }, 1500)
