@@ -8,7 +8,7 @@ export const metadata = {
   title: 'Dashboard - FuelHub',
   description: 'Manage your fuel business with FuelHub dashboard',
 }
-
+// Admin and manager users are redirected to their respective home pages in dashboard/page.jsx, so this layout is only rendered for applicants and is protected by server-side auth check. If user is not authenticated, they will be redirected to /auth/login before this layout or any child page is rendered.
 export default async function DashboardLayout({
   children,
 }) {
