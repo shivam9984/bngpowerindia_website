@@ -9,6 +9,7 @@ create table if not exists public.profiles (
   aadhaar_number text,
   pan_number text,
   aadhaar_img_url text,
+  aadhaar_back_img_url text,
   pan_img_url text,
   passport_photo_url text,
   full_address text,

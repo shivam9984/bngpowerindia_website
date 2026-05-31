@@ -1,7 +1,7 @@
 -- Storage RLS for private bucket: customer_document
 -- Assumptions:
 -- 1. Bucket "customer_document" already exists and is private.
--- 2. Customer document paths follow: {email}/aadhaar, {email}/pan, {email}/photo
+-- 2. Customer document paths follow: {email}/aadhaar, {email}/aadhaar_back, {email}/pan, {email}/photo
 -- 3. public.profiles contains id, email, and role.
 
 -- Customers can upload only into their own folder with approved filenames.
@@ -17,7 +17,7 @@ with check (
     where p.id = auth.uid()
       and p.role = 'customer'
       and lower((storage.foldername(name))[1]) = lower(p.email)
-      and split_part(name, '/', 2) in ('aadhaar', 'pan', 'photo')
+      and split_part(name, '/', 2) in ('aadhaar', 'aadhaar_back', 'pan', 'photo')
   )
 );
 
@@ -60,7 +60,7 @@ with check (
     where p.id = auth.uid()
       and p.role = 'customer'
       and lower((storage.foldername(name))[1]) = lower(p.email)
-      and split_part(name, '/', 2) in ('aadhaar', 'pan', 'photo')
+      and split_part(name, '/', 2) in ('aadhaar', 'aadhaar_back', 'pan', 'photo')
   )
 );
 

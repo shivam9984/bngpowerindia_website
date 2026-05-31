@@ -7,6 +7,7 @@ alter table public.profiles
   add column if not exists aadhaar_number text,
   add column if not exists pan_number text,
   add column if not exists aadhaar_img_url text,
+  add column if not exists aadhaar_back_img_url text,
   add column if not exists pan_img_url text,
   add column if not exists passport_photo_url text,
   add column if not exists full_address text,

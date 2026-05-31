@@ -105,6 +105,7 @@ export default function ProfilePage() {
     pan_number: '',
 
     aadhaar_img_url: '',
+    aadhaar_back_img_url: '',
     pan_img_url: '',
     passport_photo_url: '',
 
@@ -119,17 +120,20 @@ export default function ProfilePage() {
 
   const [docUrls, setDocUrls] = useState(() => ({
     aadhaar_img_url: '',
+    aadhaar_back_img_url: '',
     pan_img_url: '',
     passport_photo_url: '',
   }))
 
   const [pendingDocs, setPendingDocs] = useState(() => ({
     aadhaar_img_url: null,
+    aadhaar_back_img_url: null,
     pan_img_url: null,
     passport_photo_url: null,
   }))
   const [docOpening, setDocOpening] = useState(() => ({
     aadhaar: false,
+    aadhaar_back: false,
     pan: false,
     photo: false,
   }))
@@ -190,11 +194,13 @@ export default function ProfilePage() {
 
     setDocUrls({
       aadhaar_img_url: nextProfile.aadhaar_img_url ?? '',
+      aadhaar_back_img_url: nextProfile.aadhaar_back_img_url ?? '',
       pan_img_url: nextProfile.pan_img_url ?? '',
       passport_photo_url: nextProfile.passport_photo_url ?? '',
     })
     setPendingDocs({
       aadhaar_img_url: null,
+      aadhaar_back_img_url: null,
       pan_img_url: null,
       passport_photo_url: null,
     })
@@ -324,6 +330,7 @@ export default function ProfilePage() {
   const hasAllRequiredDocuments = useMemo(
     () =>
       Boolean(docUrls.aadhaar_img_url || pendingDocs.aadhaar_img_url) &&
+      Boolean(docUrls.aadhaar_back_img_url || pendingDocs.aadhaar_back_img_url) &&
       Boolean(docUrls.pan_img_url || pendingDocs.pan_img_url) &&
       Boolean(docUrls.passport_photo_url || pendingDocs.passport_photo_url),
     [docUrls, pendingDocs],
@@ -403,6 +410,7 @@ export default function ProfilePage() {
   }, [DOCS_BUCKET, user])
 
   const aadhaarInputRef = useRef(null)
+  const aadhaarBackInputRef = useRef(null)
   const panInputRef = useRef(null)
   const photoInputRef = useRef(null)
 
@@ -471,6 +479,7 @@ export default function ProfilePage() {
 
       const uploadPlan = [
         { docKey: 'aadhaar_img_url', documentType: 'aadhaar', uploadingKey: 'aadhaar' },
+        { docKey: 'aadhaar_back_img_url', documentType: 'aadhaar_back', uploadingKey: 'aadhaar_back' },
         { docKey: 'pan_img_url', documentType: 'pan', uploadingKey: 'pan' },
         { docKey: 'passport_photo_url', documentType: 'photo', uploadingKey: 'photo' },
       ]
@@ -497,6 +506,7 @@ export default function ProfilePage() {
         pan_number: form.pan_number || null,
 
         aadhaar_img_url: nextDocUrls.aadhaar_img_url || null,
+        aadhaar_back_img_url: nextDocUrls.aadhaar_back_img_url || null,
         pan_img_url: nextDocUrls.pan_img_url || null,
         passport_photo_url: nextDocUrls.passport_photo_url || null,
 
@@ -514,6 +524,7 @@ export default function ProfilePage() {
       setDocUrls(nextDocUrls)
       setPendingDocs({
         aadhaar_img_url: null,
+        aadhaar_back_img_url: null,
         pan_img_url: null,
         passport_photo_url: null,
       })
@@ -900,7 +911,7 @@ export default function ProfilePage() {
               <div className="grid gap-3">
                 <div className="rounded-lg border border-border bg-background p-4">
                   <div className="flex items-center justify-between gap-4">
-                    <p className="text-sm font-medium text-foreground">Aadhaar Card *</p>
+                    <p className="text-sm font-medium text-foreground">Aadhaar Front *</p>
                     <div className="shrink-0 flex items-center gap-2">
                       {isReadOnly && docUrls.aadhaar_img_url ? (
                         <Button
@@ -948,6 +959,64 @@ export default function ProfilePage() {
                         <CheckCircle2 className="h-4 w-4" />
                         <span className="truncate" title={docUrls.aadhaar_img_url}>
                           {getFilenameFromUrl(docUrls.aadhaar_img_url) || 'Uploaded'}
+                        </span>
+                      </p>
+                    ) : (
+                      <p className="text-xs text-muted-foreground">No file uploaded</p>
+                    )}
+                  </div>
+                </div>
+
+                <div className="rounded-lg border border-border bg-background p-4">
+                  <div className="flex items-center justify-between gap-4">
+                    <p className="text-sm font-medium text-foreground">Aadhaar Back *</p>
+                    <div className="shrink-0 flex items-center gap-2">
+                      {isReadOnly && docUrls.aadhaar_back_img_url ? (
+                        <Button
+                          type="button"
+                          variant="outline"
+                          className="gap-2"
+                          onClick={() => openDocument(docUrls.aadhaar_back_img_url, 'aadhaar_back')}
+                          disabled={docOpening.aadhaar_back}
+                        >
+                          <ExternalLink className="h-4 w-4" />
+                          {docOpening.aadhaar_back ? 'Opening…' : 'View'}
+                        </Button>
+                      ) : null}
+                      <input
+                        ref={aadhaarBackInputRef}
+                        type="file"
+                        accept="application/pdf,image/jpeg"
+                        className="hidden"
+                        onChange={handleDocSelect('aadhaar_back_img_url')}
+                        disabled={inputDisabled}
+                      />
+                      <Button
+                        type="button"
+                        variant="outline"
+                        className="gap-2"
+                        onClick={() => aadhaarBackInputRef.current?.click?.()}
+                        disabled={inputDisabled}
+                      >
+                        <Upload className="h-4 w-4" />
+                        {docUrls.aadhaar_back_img_url ? 'Replace' : 'Upload'}
+                      </Button>
+                    </div>
+                  </div>
+                  <div className="mt-3 min-h-5">
+                    {pendingDocs.aadhaar_back_img_url ? (
+                      <p className="inline-flex items-center gap-2 text-xs text-amber-700">
+                        <CheckCircle2 className="h-4 w-4" />
+                        <span className="truncate" title={pendingDocs.aadhaar_back_img_url.name}>
+                          {pendingDocs.aadhaar_back_img_url.name}{' '}
+                          {docUrls.aadhaar_back_img_url ? 'queued to replace current document' : 'queued for upload'}
+                        </span>
+                      </p>
+                    ) : docUrls.aadhaar_back_img_url ? (
+                      <p className="inline-flex items-center gap-2 text-xs text-emerald-700">
+                        <CheckCircle2 className="h-4 w-4" />
+                        <span className="truncate" title={docUrls.aadhaar_back_img_url}>
+                          {getFilenameFromUrl(docUrls.aadhaar_back_img_url) || 'Uploaded'}
                         </span>
                       </p>
                     ) : (
@@ -1083,7 +1152,7 @@ export default function ProfilePage() {
                 {!isSubmitReady ? (
                   <p className="text-xs text-muted-foreground">
                     {hasChanges
-                      ? 'Fill all required fields and upload Aadhaar, PAN, and Photo to enable Submit.'
+                      ? 'Fill all required fields and upload Aadhaar Front, Aadhaar Back, PAN, and Photo to enable Submit.'
                       : 'Make a change to your profile or documents to enable Submit.'}
                   </p>
                 ) : null}

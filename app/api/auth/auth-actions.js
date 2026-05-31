@@ -8,6 +8,19 @@ import { ensureUserProfile } from '@/lib/auth/profile.server'
 import { DEFAULT_PUBLIC_ROLE, toStoredRole } from '@/lib/auth/roles'
 import { getSupabaseAuthRedirectUrl } from '@/lib/supabase/env'
 
+function getPasswordResetRedirectUrl() {
+  const callbackUrl = getSupabaseAuthRedirectUrl()
+
+  try {
+    const url = new URL(callbackUrl)
+    url.searchParams.set('next', '/auth/login?mode=reset-password')
+    return url.toString()
+  } catch {
+    const separator = callbackUrl.includes('?') ? '&' : '?'
+    return `${callbackUrl}${separator}next=${encodeURIComponent('/auth/login?mode=reset-password')}`
+  }
+}
+
 /** Normalize to E.164; defaults 10-digit India numbers to +91 */
 function normalizePhoneToE164(input) {
   const s = String(input || '')
@@ -242,6 +255,60 @@ export async function signInAction(email, password) {
   }
 
   return { success: true, data }
+}
+
+export async function sendPasswordResetEmailAction(email) {
+  const supabase = await getApiServerClient()
+  const trimmed = String(email || '').trim().toLowerCase()
+
+  if (!trimmed) {
+    return { success: false, error: 'Email is required.' }
+  }
+
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
+    return { success: false, error: 'Enter a valid email address.' }
+  }
+
+  const { error } = await supabase.auth.resetPasswordForEmail(trimmed, {
+    redirectTo: getPasswordResetRedirectUrl(),
+  })
+
+  if (error) {
+    return { success: false, error: error.message }
+  }
+
+  return { success: true }
+}
+
+export async function updatePasswordAction(password) {
+  const supabase = await getApiServerClient()
+  const nextPassword = String(password || '')
+
+  if (nextPassword.length < 8) {
+    return { success: false, error: 'Password must be at least 8 characters.' }
+  }
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  if (!user) {
+    return {
+      success: false,
+      error: 'Your reset link has expired. Request a new password reset email.',
+    }
+  }
+
+  const { error } = await supabase.auth.updateUser({
+    password: nextPassword,
+  })
+
+  if (error) {
+    return { success: false, error: error.message }
+  }
+
+  await supabase.auth.signOut()
+  return { success: true }
 }
 
 export async function resendSignupConfirmationEmailAction(email) {

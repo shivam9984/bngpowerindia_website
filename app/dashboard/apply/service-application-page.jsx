@@ -112,7 +112,7 @@ function buildLocationOptions() {
 
 function validateGoogleMapsPin(value) {
   const nextValue = String(value || '').trim()
-  if (!nextValue) return 'Google Maps pin link is required.'
+  if (!nextValue) return ''
 
   try {
     const parsed = new URL(nextValue)
@@ -372,7 +372,7 @@ export function ServiceApplicationPage({ serviceKey }) {
                   <SectionHeading
                     icon={MapPin}
                     title="Project location"
-                    description="Provide the full site address and Google Maps pin for accurate verification."
+                    description="Provide the full site address. Add a Google Maps pin if available."
                   />
 
                   <div className="grid gap-4 sm:grid-cols-2">
@@ -461,7 +461,7 @@ export function ServiceApplicationPage({ serviceKey }) {
                     </div>
 
                     <div className="sm:col-span-2">
-                      <FieldLabel required>Google Maps pin location</FieldLabel>
+                      <FieldLabel>Google Maps pin location (optional)</FieldLabel>
                       <Input
                         value={form.google_maps_pin}
                         onChange={handleTextChange('google_maps_pin')}

@@ -38,7 +38,7 @@ create table if not exists public.applications (
   subdistrict_tehsil text not null,
   pincode text not null,
   full_address text not null,
-  google_maps_pin text not null,
+  google_maps_pin text,
   landmark text,
   notes text,
   reviewed_by uuid references auth.users(id) on delete set null,
@@ -54,7 +54,7 @@ create table if not exists public.applications (
       or (service_key = 'ev_charging_station' and service_label = 'EV Charging Station')
     ),
   constraint applications_google_maps_pin_check
-    check (google_maps_pin ~* '^https?://'),
+    check (google_maps_pin is null or google_maps_pin ~* '^https?://'),
   constraint applications_pincode_check
     check (pincode ~ '^[0-9]{6}$')
 );

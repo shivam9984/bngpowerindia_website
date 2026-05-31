@@ -14,7 +14,6 @@ const companyLinks = [
   { label: 'Services', href: '/services' },
   { label: 'About Us', href: '/about' },
   { label: 'Contact', href: '/contact' },
-  { label: 'Quote Request', href: '/quote' },
 ]
 
 export function Footer() {
@@ -50,7 +49,7 @@ export function Footer() {
 
             <div className="mt-6 space-y-2 text-sm text-primary-foreground/90">
               <p>A2 1004 Parijat Building, Near Awadh Bus Station,</p>
-              <p>Lucknow UP, 226016 India</p>
+              <p>Lucknow UP, 226010 India</p>
               <a className="block hover:text-white" href="tel:+919151141423">
                 +91 9151141423
               </a>

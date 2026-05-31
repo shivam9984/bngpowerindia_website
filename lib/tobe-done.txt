@@ -1,0 +1,6 @@
+- Make location of optional in each form
+- Change pincode to 226010
+- Remove qutoe requestf rom the footer
+- Implemnet forgot page
+- Design admin and amager page as well
+- 

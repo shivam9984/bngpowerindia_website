@@ -71,6 +71,7 @@ create table public.profiles (
   aadhaar_number text,
   pan_number text,
   aadhaar_img_url text,
+  aadhaar_back_img_url text,
   pan_img_url text,
   passport_photo_url text,
   full_address text,
@@ -232,7 +233,7 @@ create table public.applications (
   subdistrict_tehsil text not null,
   pincode text not null,
   full_address text not null,
-  google_maps_pin text not null,
+  google_maps_pin text,
   landmark text,
   notes text,
   reviewed_by uuid references auth.users(id) on delete set null,
@@ -248,7 +249,7 @@ create table public.applications (
       or (service_key = 'ev_charging_station' and service_label = 'EV Charging Station')
     ),
   constraint applications_google_maps_pin_check
-    check (google_maps_pin ~* '^https?://'),
+    check (google_maps_pin is null or google_maps_pin ~* '^https?://'),
   constraint applications_pincode_check
     check (pincode ~ '^[0-9]{6}$')
 );
@@ -566,7 +567,7 @@ with check (
     where p.id = auth.uid()
       and p.role = 'customer'
       and lower((storage.foldername(name))[1]) = lower(p.email)
-      and split_part(name, '/', 2) in ('aadhaar', 'pan', 'photo')
+      and split_part(name, '/', 2) in ('aadhaar', 'aadhaar_back', 'pan', 'photo')
   )
 );
 
@@ -607,7 +608,7 @@ with check (
     where p.id = auth.uid()
       and p.role = 'customer'
       and lower((storage.foldername(name))[1]) = lower(p.email)
-      and split_part(name, '/', 2) in ('aadhaar', 'pan', 'photo')
+      and split_part(name, '/', 2) in ('aadhaar', 'aadhaar_back', 'pan', 'photo')
   )
 );
 
