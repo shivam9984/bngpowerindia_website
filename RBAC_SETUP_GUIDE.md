@@ -66,7 +66,6 @@ Your Supabase integration should automatically set these. Verify in your `.env.l
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
 NEXT_PUBLIC_APP_URL=http://localhost:3000
-NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL=http://localhost:3000/auth/callback
 ```
 
 ### Step 3: Update Header Navigation
@@ -258,7 +257,7 @@ For testing, you can create users with different roles:
 **Solution:** Check the `ROLE_OPTIONS` in `dashboard-sidebar.tsx` and verify role permissions
 
 ### Issue: Email verification link not working
-**Solution:** Ensure `NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL` is correctly set in environment variables
+**Solution:** Ensure `NEXT_PUBLIC_APP_URL` is set to your deployed app origin and Supabase Auth allows `<NEXT_PUBLIC_APP_URL>/auth/callback` as a redirect URL
 
 ## 🚀 Next Steps
 

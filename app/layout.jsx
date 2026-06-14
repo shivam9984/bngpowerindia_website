@@ -1,9 +1,10 @@
 import { Analytics } from '@vercel/analytics/next'
 import { AppShell } from '@/components/layout/app-shell'
+import { getAppUrl } from '@/lib/supabase/env'
 import { Providers } from './providers'
 import './globals.css'
 
-const siteUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
+const siteUrl = getAppUrl()
 
 export const metadata = {
   metadataBase: new URL(siteUrl),
